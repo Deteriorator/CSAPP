@@ -1,24 +1,23 @@
 	.file	"hello.c"
 	.text
-	.section	.rodata.str1.1,"aMS",@progbits,1
+	.def	__main;	.scl	2;	.type	32;	.endef
+	.section .rdata,"dr"
 .LC0:
-	.string	"Hello, World"
+	.ascii "Hello, World\0"
 	.text
 	.globl	main
-	.type	main, @function
+	.def	main;	.scl	2;	.type	32;	.endef
+	.seh_proc	main
 main:
-.LFB11:
-	.cfi_startproc
-	subq	$8, %rsp
-	.cfi_def_cfa_offset 16
-	leaq	.LC0(%rip), %rdi
-	call	puts@PLT
+	subq	$40, %rsp
+	.seh_stackalloc	40
+	.seh_endprologue
+	call	__main
+	leaq	.LC0(%rip), %rcx
+	call	puts
 	movl	$0, %eax
-	addq	$8, %rsp
-	.cfi_def_cfa_offset 8
+	addq	$40, %rsp
 	ret
-	.cfi_endproc
-.LFE11:
-	.size	main, .-main
-	.ident	"GCC: (Debian 9.3.0-14) 9.3.0"
-	.section	.note.GNU-stack,"",@progbits
+	.seh_endproc
+	.ident	"GCC: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0"
+	.def	puts;	.scl	2;	.type	32;	.endef
