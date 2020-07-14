@@ -3,4 +3,4 @@ project(CSAPP C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(intro intro/hello.c)
+add_executable(show data/show-bytes.c)
